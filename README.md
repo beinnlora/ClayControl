@@ -3,11 +3,12 @@ Sporting Clay controller
 Wireless Sporting Clay Trap Controller 
 
 # Introduction
-This project describes a Wifi controller for triggering Clay Pigeon traps from a web interface e.g. mobile phone.
+This project describes a Raspberry Pi based smartphone controller for triggering Clay Pigeon traps and flush sequences from a web interface e.g. mobile phone.
 
 It allows any number of clay traps to be controlled via e.g. a smartphone or tablet. 
-Sequences of clays can be recorded, played back, paused, recorded and loaded as required.
+Sequences (flushes) of clays can be recorded, played back, paused, saved and loaded as required.
 Random sequences of clays can be created based on a user's required number of traps, number of clays, and average delay inbetween clays.
+
 
 # Technical Overview
 A Raspberry Pi serves as a wifi hotspot and captive portal, presenting connected users with a web interface for controlling the trap sequence.
@@ -16,12 +17,13 @@ Websockets is used to pass control commands from any connected device to the con
 Traps are triggered via a relay board, or optionally an RF interface to wireless receivers.
 
 # Software
-
 The Raspberry pi controller is made up of four components: 
+
 ## Webpage interface
-A Javascript enabled webpage is served to connected clients. Javascript passes events to and from the Pi via websockets. 
-The webpage is made responsive via JQueryMobile so the UI can fit any device - smartphone, tablet or computer.
-Tornado serves
+A Javascript enabled webpage is served to connected clients. Javascript passes events (button presses, clay counters, time remaining etc) to and from the Pi via websockets. 
+
+The webpage layout is made responsive via JQueryMobile so the UI can fit any device - smartphone, tablet or computer.
+Tornado serves the HTML and handles the exchange of websockets messages to clients and the python control code
 
 ## Python Control code
 A python script loads on startup, that spawns a websocket listener via Tornado. This code controls the application logic, generation of sequences, loading and saving of sequences etc.
@@ -32,9 +34,9 @@ The Raspberry Pi acts as a wifi hotspot, DNS and DHCP server. The Pi is configur
   *dnsmasq as dhcp and dns
 
 ## Startup scripts
-These are run at rc.local, and control the sequencing of 
+These are run at rc.local, and control the sequencing of configuring the Wifi access point, DNS/DHCP, and python code.
 
-The raspberry pi and USB flash drive are mounted read-only, to prevent corruption from power supply interruptions
+The raspberry pi SD car and USB flash drive are mounted read-only, to prevent corruption from power supply interruptions. Only when saving flush sequences to the USB drive is this momentarily mounted r/w. 
 
 
 # Hardware
@@ -51,7 +53,8 @@ Provides storage for user config files; allowing the SD card to remain mounted R
 Gives the option of transferring trap sequence save files between controllers.
 ## Radio Control.
 Option to trigger radio trap releases, negating the need for physical connection to each trap.
-
+## Enclosure
+A suitable box, e.g. 200x100x100 IP68 box with cable glands going out to your 
 
 
     Copyright (C) 2016 2017 2018 Stephen Wilson
@@ -69,4 +72,4 @@ Option to trigger radio trap releases, negating the need for physical connection
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
     
-    This p
+    
