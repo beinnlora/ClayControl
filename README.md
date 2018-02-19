@@ -2,7 +2,7 @@
 Sporting Flush Clay Target smartphone / wifi controller.
 
 
-# Introduction
+## Introduction
 This project describes a Raspberry Pi based smartphone controller for triggering Clay Pigeon traps and flush sequences from a web interface e.g. mobile phone.
 
 It allows any number of clay traps to be controlled via e.g. a smartphone or tablet. 
@@ -21,56 +21,56 @@ Since the interface is web based, it doe not require an App download or external
   * Generate random flush sequences: you decide which traps, how many clays, and the average target presentation rate.
   * Live view of clays remaining, time remaining in sequence, which trap is next, how many clays left from each trap etc.
 
-# Installation/Construction
+## Installation/Construction
 See the individual INSTALL-HARDWARE and  INSTALL-SOFTWARE and  for construction and configuration notes.
 
-# Technical Overview
+## Technical Overview
 A Raspberry Pi serves as a wifi hotspot and captive portal, presenting connected users with a web interface for controlling the trap sequence.
 
 Websockets is used to pass control commands from any connected device to the control software.
 
 Traps are triggered via a relay board, or optionally an RF interface to wireless receivers.
 
-# Software
+### Software
 The Raspberry pi controller is made up of four components: 
 
-## Webpage interface
+#### Webpage interface
 A Javascript enabled webpage is served to connected clients via Apache running on the Pi. Javascript in the client browser passes events (button presses, clay counters, time remaining etc) to and from the Pi via websockets. 
 
 The webpage layout is made responsive via JQueryMobile so the UI can fit any device - smartphone, tablet or computer.
 
 A websockets interface is instantiated via Tornado on the Pi to pass messages between browser and Python control code.
 
-## Python Control code
+#### Python Control code
 A python script loads on startup, that spawns a websocket listener via Tornado. This code controls the application logic, generation of sequences, loading and saving of sequences etc.
 
-## Wifi hotspot
+#### Wifi hotspot
 The Raspberry Pi acts as a wifi hotspot, DNS and DHCP server. The Pi is configured as a captive portal, so all http requests of connected clients redirect to the web interface
   * hostapd
   * ics-dhcpd-server
 
-## Startup scripts
+#### Startup scripts
 These are run at rc.local, and control the sequencing of configuring the Wifi access point, DNS/DHCP, and python code.
 
-## File systems
+#### File systems
 The raspberry pi SD card and USB flash drive are mounted read-only, to prevent corruption from power supply interruptions. Only when saving flush sequences to the USB drive is this momentarily mounted r/w. 
 
 
-# Hardware
-## Raspberry Pi 3 
+### Hardware
+#### Raspberry Pi 3 
 Built-in wifi could be used, but a USB device offers greater range through external antenna.
-## USB Wifi dongle
+#### USB Wifi dongle
 High power, external antenna, drivers available for hostapd
-## Relay Board
+#### Relay Board
 Generic TTL-triggered relay board
-## Power Supply
+#### Power Supply
 A typical ebay 12v-5v DC-DC power supply feeds the PI and the relay board. 
-## USB flash drive
+#### USB flash drive
 Provides storage for user config files; allowing the SD card to remain mounted RO at all times to help prevent corruption.
 Gives the option of transferring trap sequence save files between controllers.
-## Radio Control.
+#### Radio Control.
 Option to trigger radio trap releases, negating the need for physical connection to each trap.
-## Enclosure
+#### Enclosure
 A suitable box, e.g. 200x100x100 IP68 box with cable glands going out to your 
 
 
