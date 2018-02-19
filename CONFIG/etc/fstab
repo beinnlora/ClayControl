@@ -1,0 +1,14 @@
+#mounts boot drive and data partition as READ ONLY
+# NB only apply this after you are happy with configuration
+proc            /proc           proc    defaults          0       0
+/dev/mmcblk0p1  /boot           vfat    defaults,ro          0       2
+/dev/mmcblk0p2  /               ext4    defaults,noatime,ro  0       1
+
+# mount USB pen drive as read-only.
+/dev/sda1 /mnt/usb1 vfat	auto,users,ro,uid=pi,gid=pi 0 0	
+
+# a swapfile is not a swap partition, no line here
+#   use  dphys-swapfile swap[on|off]  for that
+tmpfs           /tmp            tmpfs   nodev,nosuid,size=30M,mode=1777    0    0
+tmpfs           /var/log        tmpfs   nodev,nosuid,size=30M,mode=1777    0    0
+
