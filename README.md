@@ -1,17 +1,29 @@
 # ClayControl
-Sporting Clay controller
-Wireless Sporting Clay Trap Controller 
+Sporting Flush Clay Target smartphone / wifi controller.
+
 
 # Introduction
 This project describes a Raspberry Pi based smartphone controller for triggering Clay Pigeon traps and flush sequences from a web interface e.g. mobile phone.
 
 It allows any number of clay traps to be controlled via e.g. a smartphone or tablet. 
+
 Sequences (flushes) of clays can be recorded, played back, paused, saved and loaded as required.
+
 Random sequences of clays can be created based on a user's required number of traps, number of clays, and average delay inbetween clays.
 
+Since the interface is web based, and requires no external internet connection, any device that has wifi and a browser that supports websockets (Android/iOS) can be used as a controller. Multiple devices can connect to the controller to observe progress through a flush sequence.
+
+## Features:
+  *Control any number of traps (up to the limit of how many relays you want to connect to the Pi). We have tried 10 traps with success
+  *Use any 'smart' phone or tablet - any device with wifi and a browser can act as your clay controller.
+  *Record and playback flush sequences at the touch of a button
+  *Save your favourite flush sequences to USB drive, and load them up any time at the click of a button.
+  *Generate random flush sequences: you decide which traps, how many clays, and the average target presentation rate.
+  *Live view of clays remaining, time remaining in sequence, which trap is next, how many clays left from each trap etc.
 
 # Technical Overview
 A Raspberry Pi serves as a wifi hotspot and captive portal, presenting connected users with a web interface for controlling the trap sequence.
+
 Websockets is used to pass control commands from any connected device to the control software.
 
 Traps are triggered via a relay board, or optionally an RF interface to wireless receivers.
@@ -20,10 +32,11 @@ Traps are triggered via a relay board, or optionally an RF interface to wireless
 The Raspberry pi controller is made up of four components: 
 
 ## Webpage interface
-A Javascript enabled webpage is served to connected clients. Javascript passes events (button presses, clay counters, time remaining etc) to and from the Pi via websockets. 
+A Javascript enabled webpage is served to connected clients via Apache running on the Pi. Javascript in the client browser passes events (button presses, clay counters, time remaining etc) to and from the Pi via websockets. 
 
 The webpage layout is made responsive via JQueryMobile so the UI can fit any device - smartphone, tablet or computer.
-Tornado serves the HTML and handles the exchange of websockets messages to clients and the python control code
+
+A websockets interface is instantiated via Tornado on the Pi to pass messages between browser and Python control code.
 
 ## Python Control code
 A python script loads on startup, that spawns a websocket listener via Tornado. This code controls the application logic, generation of sequences, loading and saving of sequences etc.
