@@ -11,18 +11,18 @@ Sequences (flushes) of clays can be recorded, played back, paused, saved and loa
 
 Random sequences of clays can be created based on a user's required number of traps, number of clays, and average delay inbetween clays.
 
-Since the interface is web based, and requires no external internet connection, any device that has wifi and a browser that supports websockets (Android/iOS) can be used as a controller. Multiple devices can connect to the controller to observe progress through a flush sequence.
+Since the interface is web based, it doe not require an App download or external internet connection. Any 'smart' device that has wifi and a browser that supports websockets (Android/iOS) can be used as a controller. Multiple devices can connect to the controller to observe progress through a flush sequence.
 
 ## Features:
-  *Control any number of traps (up to the limit of how many relays you want to connect to the Pi). We have tried 10 traps with success
-  *Use any 'smart' phone or tablet - any device with wifi and a browser can act as your clay controller.
-  *Record and playback flush sequences at the touch of a button
-  *Save your favourite flush sequences to USB drive, and load them up any time at the click of a button.
-  *Generate random flush sequences: you decide which traps, how many clays, and the average target presentation rate.
-  *Live view of clays remaining, time remaining in sequence, which trap is next, how many clays left from each trap etc.
+  * Control any number of traps (up to the limit of how many relays you want to connect to the Pi). We have tried 10 traps with success.
+  * Turn any 'smart' phone or tablet into a trap remote control- any device with wifi and a browser can act as your clay controller.
+  * Record and playback flush sequences at the touch of a button.
+  * Save your favourite flush sequences to USB drive, and load them up any time at the click of a button.
+  * Generate random flush sequences: you decide which traps, how many clays, and the average target presentation rate.
+  * Live view of clays remaining, time remaining in sequence, which trap is next, how many clays left from each trap etc.
 
 # Installation/Construction
-See the individual INSTALL-SOFTWARE and INSTALL-HARDWARE for construction and configuration notes
+See the individual INSTALL-HARDWARE and  INSTALL-SOFTWARE and  for construction and configuration notes.
 
 # Technical Overview
 A Raspberry Pi serves as a wifi hotspot and captive portal, presenting connected users with a web interface for controlling the trap sequence.
@@ -45,14 +45,15 @@ A websockets interface is instantiated via Tornado on the Pi to pass messages be
 A python script loads on startup, that spawns a websocket listener via Tornado. This code controls the application logic, generation of sequences, loading and saving of sequences etc.
 
 ## Wifi hotspot
-The Raspberry Pi acts as a wifi hotspot, DNS and DHCP server. The Pi is configured as a captive portal, so all web requests of connected clients redirect to the web interface
-  *hostapd
-  *dnsmasq as dhcp and dns
+The Raspberry Pi acts as a wifi hotspot, DNS and DHCP server. The Pi is configured as a captive portal, so all http requests of connected clients redirect to the web interface
+  * hostapd
+  * ics-dhcpd-server
 
 ## Startup scripts
 These are run at rc.local, and control the sequencing of configuring the Wifi access point, DNS/DHCP, and python code.
 
-The raspberry pi SD car and USB flash drive are mounted read-only, to prevent corruption from power supply interruptions. Only when saving flush sequences to the USB drive is this momentarily mounted r/w. 
+## File systems
+The raspberry pi SD card and USB flash drive are mounted read-only, to prevent corruption from power supply interruptions. Only when saving flush sequences to the USB drive is this momentarily mounted r/w. 
 
 
 # Hardware
