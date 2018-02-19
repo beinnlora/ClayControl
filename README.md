@@ -21,6 +21,9 @@ Since the interface is web based, and requires no external internet connection, 
   *Generate random flush sequences: you decide which traps, how many clays, and the average target presentation rate.
   *Live view of clays remaining, time remaining in sequence, which trap is next, how many clays left from each trap etc.
 
+# Installation/Construction
+See the individual INSTALL-SOFTWARE and INSTALL-HARDWARE for construction and configuration notes
+
 # Technical Overview
 A Raspberry Pi serves as a wifi hotspot and captive portal, presenting connected users with a web interface for controlling the trap sequence.
 
