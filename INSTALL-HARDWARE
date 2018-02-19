@@ -1,0 +1,26 @@
+##Pi:
+rPI2 is fine.
+## Wifi USB dongle
+Onboard wifi of Rpi3 will work, but not great range. Get one with external antenna for best range/flexibility
+## USB flash drive
+Any that fits in your enclosure
+## Relay board
+I use 2x5 channel 5VDC coil TTL trigger boards, generic eBay availability marketed as "Arduino relay board" to give 10 trap capability.
+## power supply
+The Pi and relay boards run off 12vDC, so the easiest thing is to buy a DC-DC converter of ~1-2A current capacity. these are cheap on the internet.
+This controller can share a 12v car battery quite happily with one of the trap batteries. Current consumption is low enough to leave connected all day.
+Size the power supply to the peak current draw of the Pi AND when all relay coils are active.
+I recommend a reverse polarity protection diode and fuse prior to the DC-DC converter.
+## enclosure
+I use IP68 enclosures and cable glands througout.
+
+##Mapping GPIO to trap relays
+line~180 in the Python code maps the internal trap numbers (1-10) to GPIO pins.
+trap2pin=[0,11,15,12,16,35,33,38,36,37,40]
+
+so 
+trap 1 is on GPIO 11  referenced by trap2pin[1]
+trap 2 is on GPIO 15  referenced by trap2pin[2] etc
+(n.b. trap2pin[0] is not used for clarity of code)
+
+
