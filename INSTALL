@@ -1,0 +1,28 @@
+Install Apache2, Python, ICS-dhcpd, hostapd
+Install Python libraries:
+  *Tornado
+  *RPi.GPIO
+  *socket
+  *time
+  *random
+  *json
+  *subprocess
+  *Queue
+  *threading
+  *websocket
+  
+  Copy HTML folder and subdirectories into your apache2 root
+  
+  Copy python script somewhere executable.
+  
+  Configure your wifi dongle and configure hostapd to turn your wifi into hotspot.
+  
+  Configure Apache2 to serve the HTML and JS scripts.
+      
+  Configure dhcpd to serve DHCP and DNS, and resolve all DNS to the local IP of your pi (captive portal)
+
+  Configure /etc/rc.local to start ics-dhcp-server on startup if necessary, and launch the python script on startup.
+  
+  When all confirmed working, set SD card as read only, and to mount as read-only on boot.
+  
+  
