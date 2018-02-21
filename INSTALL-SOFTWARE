@@ -7,30 +7,35 @@ CONFIG/  contains sample config files for other subsystems (hostapd/dhcpd/fstab)
 On a rPi2/3, start with Jessie Lite:
 Install Apache2, Python, ICS-dhcpd, hostapd
 Install Python libraries using PIP or similar:
-  *Tornado
-  *RPi.GPIO
-  *socket
-  *time
-  *random
-  *json
-  *subprocess
-  *Queue
-  *threading
-  *websocket
+  * Tornado
+  * RPi.GPIO
+  * socket
+  * time
+  * random
+  * json
+  * subprocess
+  * Queue
+  * threading
+  * websocket
   
   Copy HTML folder and subdirectories into your apache2 document root
   
   Copy PYTHON  script somewhere executable.
   
-  Turn your wifi into a hotspot DNS and DHCP server, with captive redirect of all HTTP requests to your Pi's IP. Use hostapd and DNSMASQ configured as  
+  Turn your wifi into a wifi hotspot,  DNS and DHCP server, with captive redirect of all HTTP requests to your Pi's IP. 
+  Give your Pi wlan0 a static IP address for ease.
+  Use hostapd to turn into wifi hotspot:
   See https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
-  
+  Use DNSMASQ as DHCP server and to resolve all DNS requests to your pi's IP address. See the dnsmasq.conf in CONFIG/etc
     
-  Configure Apache2 to serve the HTML and JS scripts, and redirect to the correct html file by default. I have the index.html as a quick 'accept terms and conditions' page, with an 'I accept' button that takes you to the numbered html document.
+  Configure Apache2 to serve the HTML and JS scripts, and redirect to the correct html file by default. 
+  (Usually just copy the contents of HTML/ into your /var/www folder)
+  I have the index.html as a quick 'accept terms and conditions' page, with an 'I accept' button that takes you to the numbered html document.
     
   Configure /etc/rc.local to launch the python script on startup.
   
-  When all confirmed working, set SD card as read only, and to mount as read-only on boot. See https://hallard.me/raspberry-pi-read-only/
+  When all confirmed working, set SD card as read only, and to mount as read-only on boot. 
+  See https://hallard.me/raspberry-pi-read-only/
   Also see the fstab in the CONFIG/folder for  a sample.
   Note that the python script will re-mount the USB drive read-write as needed to save sequences.
   
