@@ -11,7 +11,7 @@ Sequences (flushes) of clays can be recorded, played back, paused, saved and loa
 
 Random sequences of clays can be created based on a user's required number of traps, number of clays, and average delay inbetween clays.
 
-Since the interface is web based, it doe not require an App download or external internet connection. Any 'smart' device that has wifi and a browser that supports websockets (Android/iOS) can be used as a controller. Multiple devices can connect to the controller to observe progress through a flush sequence.
+Since the interface is web based, it does not require an App download or external internet connection. Any 'smart' device that has wifi and a browser that supports websockets (Android/iOS) can be used as a controller. Multiple devices can connect to the controller to observe progress through a flush sequence.
 
 ## Features:
   * Control any number of traps (up to the limit of how many relays you want to connect to the Pi). We have tried 10 traps with success.
@@ -52,13 +52,12 @@ The Raspberry Pi acts as a wifi hotspot, DNS and DHCP server. The Pi is configur
 #### Startup scripts
 These are run at rc.local, and control the sequencing of configuring the Wifi access point, DNS/DHCP, and python code.
 
-#### File systems
-The raspberry pi SD card and USB flash drive are mounted read-only, to prevent corruption from power supply interruptions. Only when saving flush sequences to the USB drive is this momentarily mounted r/w. 
+
 
 
 ### Hardware
 #### Raspberry Pi 3 
-Built-in wifi could be used, but a USB device offers greater range through external antenna.
+Built-in wifi could be used, but a USB device offers greater range through external antenna.Note that the SD card is configured to run mounted read-only. The USB drive is only mounted read-write when saving a trap sequence.
 #### USB Wifi dongle
 High power, external antenna, drivers available for hostapd
 #### Relay Board
