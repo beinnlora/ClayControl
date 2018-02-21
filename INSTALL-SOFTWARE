@@ -1,12 +1,12 @@
 
-Contents:
+# Contents:
 HTML/   contains static HTML and JS resources, to be served by Apache
 PYTHON/ contains python script logic
 CONFIG/  contains sample config files for other subsystems (hostapd/dhcpd/fstab)
 
-On a rPi3 
+On a rPi2/3, start with Jessie Lite:
 Install Apache2, Python, ICS-dhcpd, hostapd
-Install Python libraries:
+Install Python libraries using PIP or similar:
   *Tornado
   *RPi.GPIO
   *socket
@@ -18,16 +18,23 @@ Install Python libraries:
   *threading
   *websocket
   
-  Copy HTML folder and subdirectories into your apache2 root
+  Copy HTML folder and subdirectories into your apache2 document root
   
   Copy PYTHON  script somewhere executable.
   
-  Configure your wifi dongle and configure hostapd to turn your wifi into hotspot.
-  Configure Apache2 to serve the HTML and JS scripts.
-  Configure dhcpd to serve DHCP and DNS, and resolve all DNS to the local IP of your pi (captive portal)
-  Configure /etc/rc.local to start ics-dhcp-server on startup if necessary, and launch the python script on startup.
+  Turn your wifi into a hotspot DNS and DHCP server, with captive redirect of all HTTP requests to your Pi's IP. Use hostapd and DNSMASQ configured as  
+  See https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
   
-  When all confirmed working, set SD card as read only, and to mount as read-only on boot.
+    
+  Configure Apache2 to serve the HTML and JS scripts, and redirect to the correct html file by default. I have the index.html as a quick 'accept terms and conditions' page, with an 'I accept' button that takes you to the numbered html document.
+    
+  Configure /etc/rc.local to launch the python script on startup.
+  
+  When all confirmed working, set SD card as read only, and to mount as read-only on boot. See https://hallard.me/raspberry-pi-read-only/
+  Also see the fstab in the CONFIG/folder for  a sample.
+  Note that the python script will re-mount the USB drive read-write as needed to save sequences.
+  
+  
   
   
   
